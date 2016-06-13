@@ -18,7 +18,7 @@
     <div class="wrapper">
       <header>
         <h1>libchen</h1>
-        <p>A General Purpose C++ Toolkit</p>
+        <p>A Micro C++ Foundation Framework</p>
         <p class="view"><a href="https://github.com/chensoft/libchen">View the Project on GitHub <small>chensoft/libchen</small></a></p>
         <ul>
           <li><a href="https://github.com/chensoft/libchen/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -34,14 +34,88 @@
 <a href="https://github.com/chensoft/libchen/releases/latest"><img src="http://github-release-version.herokuapp.com/github/chensoft/libchen/release.svg?style=flat" alt="release"></a>
 <a href="https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT licensed"></a></p>
 
-<p>libchen is a general purpose C++ toolkit, it contains many useful and handy methods for creating complex software. It's open-source and released under the MIT License. If you have any questions or advices, feel free to contact me via <a href="mailto:admin@chensoft.com">email</a>.</p>
+<p>libchen is a general purpose C++ toolkit, it contains many useful and handy methods for creating complex software. It's open-source and released under the MIT License.</p>
 
 <h2>
-<a id="quickstart" class="anchor" href="#quickstart" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quickstart</h2>
+<a id="platforms" class="anchor" href="#platforms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Platforms</h2>
 
-<p>libchen is heavily depends on C++11, make sure your compiler have fully support for C++11, see the following <code>Requirements</code> part if you have any doubt.</p>
+<ul>
+<li>Linux (g++ 4.8.4+, clang++ 3.5+)</li>
+<li>OS X (clang++ 3.5+)</li>
+<li>Android (ndk r10+)</li>
+<li>iOS (xcode 7+)</li>
+</ul>
 
-<p>The easiest way to build libchen is using CMake 3.1+:</p>
+<p>Notice that C++11's regex is incomplete on g++ 4.8.x and clang++ 3.5, if you want to use it, you shall upgrade your compiler to the latest version.</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>base - basic part
+
+<ul>
+<li>string format, print, check equal, prefix, suffix, join, replace, trim and more</li>
+<li>utf-8 string character count, substr, check bom and convert from unicode point</li>
+<li>float equality test, integer swap, number to string, random generator</li>
+<li>regex match, replace and group</li>
+<li>check map's key, get all keys, all values, flip map</li>
+<li>make vector unique, combine, intersect and more</li>
+<li>provide a wrapper to hold any type</li>
+</ul>
+</li>
+<li>data - data parse
+
+<ul>
+<li>json file parser</li>
+<li>ini file parser</li>
+</ul>
+</li>
+<li>mt - multithreading
+
+<ul>
+<li>semaphore support</li>
+<li>threadpool support, use std::future</li>
+</ul>
+</li>
+<li>sys - system operation
+
+<ul>
+<li>file path check, create and visit folder, many useful filesystem methods</li>
+<li>create daemon easily</li>
+<li>uuid generator</li>
+</ul>
+</li>
+<li>time - time and date
+
+<ul>
+<li>simple timing class</li>
+<li>thread-safe gmt &amp; local time getter</li>
+</ul>
+</li>
+<li>tool - misc tools
+
+<ul>
+<li>simple logging system</li>
+<li>modern command line parser</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="compile" class="anchor" href="#compile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Compile</h2>
+
+<h3>
+<a id="method-1---via-source" class="anchor" href="#method-1---via-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Method 1 - Via Source</h3>
+
+<p>You can directly add the source code to your project, the <code>include</code> folder contains the headers, the <code>src</code> folder contains the source code. Don't add <code>sample</code> and <code>test</code> folders, they are the test code.</p>
+
+<p>Please note that the <code>src/plat</code> folder contains some platform dependent code, if you use Unix-like os, just add the <code>src/plat/unix</code> folder, exclude others. If you use Windows, add the <code>src/plat/win</code> folder only.</p>
+
+<h3>
+<a id="method-2---via-library" class="anchor" href="#method-2---via-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Method 2 - Via Library</h3>
+
+<p>If you want to compile it to a library, the easiest way is using CMake:</p>
 
 <pre><code>git clone https://github.com/chensoft/libchen.git
 cd libchen
@@ -52,53 +126,13 @@ cmake ..
 make
 </code></pre>
 
-<p>If no errors, a static library named <code>libchen.a</code> is generated in the build folder, good luck.</p>
+<p>If no errors, a static library named <code>libchen.a</code> is generated in the <code>build</code> folder.</p>
 
 <p>The default static library has debug info, if you want to build a release library, simply change the build type and compile again:</p>
 
 <pre><code>cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 </code></pre>
-
-<h2>
-<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
-
-<p>The library is known to work under the following environments:</p>
-
-<ul>
-<li>GCC 5.x (it has fully support for C++11)</li>
-<li>Clang (bundled with Xcode 7.x)</li>
-</ul>
-
-<p>You may need to install Xcode command line tools if you use OS X:</p>
-
-<pre><code>xcode-select --install
-</code></pre>
-
-<p>My personal development environment is:</p>
-
-<pre><code>// OS
-* OS X EI Capitan 10.11.5
-* Ubuntu 16.04 LTS
-
-// IDE
-* CLion 2016.1
-* Xcode 7.3.1
-</code></pre>
-
-<h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
-
-<ul>
-<li>string, map, vector algorithms</li>
-<li>utf-8 string support</li>
-<li>json string and file parser</li>
-<li>ini configuration parser</li>
-<li>semaphore, threadpool support</li>
-<li>filesystem handy methods</li>
-<li>thread-safe logging system</li>
-<li>a modern command line parser</li>
-</ul>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>

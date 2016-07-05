@@ -30,12 +30,12 @@
         <h1>
 <a id="libchen" class="anchor" href="#libchen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>libchen</h1>
 
-<p><a href="https://travis-ci.org/chensoft/libchen"><img src="https://travis-ci.org/chensoft/libchen.svg?branch=master" alt="Build Status"></a>
-<a href="https://ci.appveyor.com/project/chensoft/libchen"><img src="https://ci.appveyor.com/api/projects/status/v7jtgjh4hso5qim8?svg=true" alt="Build status"></a>
-<a href="https://github.com/chensoft/libchen/releases/latest"><img src="http://github-release-version.herokuapp.com/github/chensoft/libchen/release.svg?style=flat" alt="release"></a>
+<p><a href="https://travis-ci.org/chensoft/libchen"><img src="https://img.shields.io/travis/chensoft/libchen.svg?label=Linux%20Mac" alt="Build Status"></a>
+<a href="https://ci.appveyor.com/project/chensoft/libchen"><img src="https://img.shields.io/appveyor/ci/chensoft/libchen.svg?label=Windows" alt="Build status"></a>
+<a href="https://github.com/chensoft/libchen/releases/latest"><img src="http://github-release-version.herokuapp.com/github/chensoft/libchen/release.svg?style=flat&amp;refresh=0" alt="release"></a>
 <a href="https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT licensed"></a></p>
 
-<p>libchen is a general purpose C++ toolkit, it contains many useful and handy methods for creating complex software. It's open-source and released under the MIT License.</p>
+<p>libchen is a general purpose C++ toolkit, it contains many useful and handy methods for creating complex software. It's cross-platform and released under the MIT License.</p>
 
 <h2>
 <a id="platforms" class="anchor" href="#platforms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Platforms</h2>
@@ -57,49 +57,49 @@
 <li>base - basic part
 
 <ul>
-<li>string format, print, check equal, prefix, suffix, join, replace, trim and more</li>
-<li>utf-8 string character count, substr, check bom and convert from unicode point</li>
-<li>float equality test, integer swap, number to string, random generator</li>
-<li>regex match, replace and group</li>
-<li>check map's key, get all keys, all values, flip map</li>
-<li>make vector unique, combine, intersect and more</li>
-<li>provide a wrapper to hold any type</li>
+<li>str: string format, print, equality test, prefix &amp; suffix, join, replace, trim and more</li>
+<li>utf8: check utf-8 string character count, retrieve sub string, check bom</li>
+<li>any: provide a wrapper to hold any type</li>
+<li>num: float equality test, integer swap, number to string, random number generator</li>
+<li>map: check key existence, retrieve all keys, all values, flip map's key and value</li>
+<li>vector: make unique, combine, intersect and difference</li>
+<li>regex: simple wrapper for regex match, replace and group</li>
 </ul>
 </li>
 <li>data - data parse
 
 <ul>
-<li>json file parser</li>
-<li>ini file parser</li>
+<li>json: json file &amp; string parser</li>
+<li>ini: ini file &amp; string parser</li>
 </ul>
 </li>
 <li>mt - multithreading
 
 <ul>
-<li>semaphore support</li>
-<li>threadpool support, use std::future</li>
+<li>semaphore: C++11 semaphore support</li>
+<li>threadpool: threadpool support, use std::future</li>
 </ul>
 </li>
 <li>sys - system operation
 
 <ul>
-<li>dirname, basename, realpath, file exist and many filesystem related methods</li>
-<li>create daemon easily</li>
-<li>uuid generator</li>
+<li>fs: dirname, basename, realpath, file exist and many filesystem related methods</li>
+<li>sys: uuid generator</li>
+<li>proc: create daemon easily, get process pid and kill process</li>
 </ul>
 </li>
 <li>time - time and date
 
 <ul>
-<li>simple timing class</li>
-<li>thread-safe gmt &amp; local time getter</li>
+<li>time: simple timing class</li>
+<li>date: thread-safe gmt &amp; local time</li>
 </ul>
 </li>
 <li>tool - misc tools
 
 <ul>
-<li>simple logging system</li>
-<li>modern command line parser</li>
+<li>log: simple logging system</li>
+<li>cmd: modern command line parser</li>
 </ul>
 </li>
 </ul>

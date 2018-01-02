@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file(see http://k
 - daemon: avoid the standard file descriptors to be reused.
 
 ### Fixed
+- fs: '/..' should be normalized to '/'
 - fs: resize string if user provide a large length to read.
 - threadpool: all jobs should be done before exit.
 

@@ -96,10 +96,11 @@ namespace chen
          * e.g: a/.../b to a/.../b because the "..." is invalid path characters, it will be ignored
          * e.g: a/../../b to ../b because the path is relative and second ".." can't be removed
          * e.g: /usr/local/etc/.. to /usr/local
+         * e.g: /.. to /
          * Windows:
          * e.g: C:\a to C:\a, C:\.\a to C:\a
          * e.g: C:\a\...\b to C:\a\...\b
-         * e.g: C:\a\..\..\b to C:\..\b
+         * e.g: C:\a\..\..\b to C:\b
          * e.g: C:\a\..\b to C:\b
          * @caution support both Unix & Windows path
          */

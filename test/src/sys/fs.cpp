@@ -37,11 +37,12 @@ TEST(SysFsTest, General)
     EXPECT_EQ("a/.../b", fs::normalize("a/.../b"));  // this is a invalid path
     EXPECT_EQ("../b", fs::normalize("a/../../b"));   // the second .. don't know how to removed
     EXPECT_EQ("/usr/local", fs::normalize("/usr/local/etc/.."));
+    EXPECT_EQ("/", fs::normalize("/.."));
 
     EXPECT_EQ("C:\\a", fs::normalize("C:\\a"));
     EXPECT_EQ("C:\\a", fs::normalize("C:\\.\\a"));
     EXPECT_EQ("C:\\a\\...\\b", fs::normalize("C:\\a\\...\\b"));
-    EXPECT_EQ("C:\\..\\b", fs::normalize("C:\\a\\..\\..\\b"));
+    EXPECT_EQ("C:\\b", fs::normalize("C:\\a\\..\\..\\b"));
     EXPECT_EQ("C:\\b", fs::normalize("C:\\a\\..\\b"));
 
     // dirname

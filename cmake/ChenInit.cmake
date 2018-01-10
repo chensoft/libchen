@@ -3,7 +3,7 @@
 # Licensed under MIT license
 # Copyright 2016 Jian Chen
 
-# C++ version(vs 2015 already support C++11)
+# C++ version(vs2015 already support C++11)
 if(NOT MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()

@@ -1,9 +1,8 @@
 /**
  * libchen: A General Purpose C++ Toolkit
- * @author    Jian Chen <admin@chensoft.com>
- * @link      http://chensoft.com
- * @license   Licensed under MIT license
- * @copyright Copyright 2016 Jian Chen
+ * @author  Jian Chen <admin@chensoft.com>
+ * @link    http://chensoft.com
+ * @license Licensed under MIT license
  */
 #pragma once
 

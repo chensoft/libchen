@@ -50,7 +50,7 @@ Notice that C++11's regex is incomplete on g++ 4.8.x, if you want to use it, you
 
 ### Method 1 - Via Source
 
-You can directly add the source code to your project, the `include` folder contains the headers, the `src` folder contains the source code. Don't add `sample ` and `test` folders, they are the test code.
+You can directly add the source code to your project, the `include` folder contains the headers, the `src` folder contains the source code. Don't add `test` folder, they are the test code.
 
 Please note that the `src/plat` folder contains some platform dependent code, if you use Unix-like os, just add the `src/plat/unix` folder, exclude others. If you use Windows, add the `src/plat/win` folder only.
 

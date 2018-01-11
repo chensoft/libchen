@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file(see http://k
 - date: change the class interface, store current date only.
 - log: use iso date format for logging.
 - cmd: make the method prototype equal to main function.
+- cmake: redesign it to adapt modern cmake syntax.
 - daemon: avoid the standard file descriptors to be reused.
 
 ### Fixed

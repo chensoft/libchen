@@ -31,5 +31,5 @@ target_include_directories(libchen PUBLIC ${CMAKE_SOURCE_DIR}/include)
 option(CHEN_CODE_COVERAGE "Enable libchen code coverage." OFF)
 
 if(CHEN_CODE_COVERAGE)
-    target_compile_options(libchen PUBLIC -g -O0 --coverage)  # debug, no optimization, enable coverage
+    target_compile_options(libchen PRIVATE -g -O0 --coverage)  # debug, no optimization, enable coverage
 endif()

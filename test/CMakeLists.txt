@@ -19,9 +19,9 @@ endif()
 # include path
 target_include_directories(libchen_test PRIVATE lib/googletest/googletest/include)
 
-# link library
-target_link_libraries(libchen_test libchen gtest)
-
 # googletest
 set(gtest_force_shared_crt ON CACHE BOOL "Use /MD in googletest")
 add_subdirectory(lib/googletest/googletest)
+
+# link library
+target_link_libraries(libchen_test libchen gtest)

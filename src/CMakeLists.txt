@@ -27,6 +27,14 @@ set_target_properties(
 # include path
 target_include_directories(libchen PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
+# install
+include(GNUInstallDirs)
+install(TARGETS libchen
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/chen DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
 # code coverage
 option(CHEN_CODE_COVERAGE "Enable libchen code coverage." OFF)
 

@@ -25,8 +25,3 @@ target_link_libraries(libchen_test libchen gtest)
 # googletest
 set(gtest_force_shared_crt ON CACHE BOOL "Use /MD in googletest")
 add_subdirectory(lib/googletest/googletest)
-
-
-## group files in the IDE(e.g: Xcode and Visual Studio)
-#chen_group_files(${CMAKE_CURRENT_SOURCE_DIR} "${INC_TEST}")
-#chen_group_files(${CMAKE_CURRENT_SOURCE_DIR} "${SRC_TEST}")

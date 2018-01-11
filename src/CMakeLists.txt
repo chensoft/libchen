@@ -32,11 +32,3 @@ option(CHEN_CODE_COVERAGE "Enable libchen code coverage." OFF)
 if(CHEN_CODE_COVERAGE)
     target_compile_options(libchen PUBLIC -g -O0 --coverage)  # debug, no optimization, enable coverage
 endif()
-
-
-#include(cmake/ChenInit.cmake)
-#include(cmake/ChenUtil.cmake)
-#
-## group files in the IDE(e.g: Xcode and Visual Studio)
-#chen_group_files(${CMAKE_CURRENT_SOURCE_DIR} "${INC_CHEN}")
-#chen_group_files(${CMAKE_CURRENT_SOURCE_DIR} "${SRC_CHEN}")

@@ -6,6 +6,15 @@ file(GLOB_RECURSE SRC_CHEN *.cpp)
 # use -DBUILD_SHARED_LIBS=ON to build a shared library
 add_library(libchen ${SRC_CHEN})
 
+# versions
+target_compile_definitions(
+        libchen PUBLIC
+        CHEN_VERSION_MAJOR=${libchen_VERSION_MAJOR}
+        CHEN_VERSION_MINOR=${libchen_VERSION_MINOR}
+        CHEN_VERSION_PATCH=${libchen_VERSION_PATCH}
+        CHEN_VERSION="${libchen_VERSION}"
+)
+
 # properties
 set_target_properties(
         libchen PROPERTIES

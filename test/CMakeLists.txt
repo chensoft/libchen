@@ -1,4 +1,4 @@
-add_executable(libchen-test EXCLUDE_FROM_ALL "")  # use make test to run it
+add_executable(libchen-test "")
 
 # environment
 set_target_properties(
@@ -26,3 +26,6 @@ add_subdirectory(lib/googletest/googletest)
 
 # link library
 target_link_libraries(libchen-test libchen gtest)
+
+# make test
+add_test(libchen-test libchen-test)

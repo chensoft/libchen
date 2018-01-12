@@ -28,7 +28,6 @@ file(GLOB_RECURSE CHEN_SRC *.cpp)  # I hate to list all the files
 target_sources(libchen PRIVATE ${CHEN_SRC})
 
 # install libs
-include(GNUInstallDirs)
 install(
     TARGETS libchen
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

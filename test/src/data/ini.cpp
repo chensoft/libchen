@@ -8,26 +8,25 @@
 #include "chen/base/str.hpp"
 #include "chen/sys/fs.hpp"
 #include "gtest/gtest.h"
-#include "../conf.hpp"
 
 TEST(DataIniTest, General)
 {
     using chen::ini;
     using chen::str;
+    using chen::fs;
 
-    if (conf::data.empty())
-        return ::testing::internal::ColoredPrintf(::testing::internal::COLOR_YELLOW, "warning: you didn't specify test data folder, skip ini test\n\n");
+    auto dir = fs::dirname(__FILE__) + "/../../data/";
 
     // fail
     for (int i = 1; i <= 5; ++i)
     {
-        EXPECT_THROW(ini::parse(conf::data + str::format("/ini/fail%d.ini", i), true), ini::error);
+        EXPECT_THROW(ini::parse(dir + str::format("ini/fail%d.ini", i), true), ini::error);
     }
 
     // pass
     for (int j = 1; j <= 4; ++j)
     {
-        EXPECT_NO_THROW(ini::parse(conf::data + str::format("/ini/pass%d.ini", j), true));
+        EXPECT_NO_THROW(ini::parse(dir + str::format("ini/pass%d.ini", j), true));
     }
 
     // equal(usage of block text in C++11)

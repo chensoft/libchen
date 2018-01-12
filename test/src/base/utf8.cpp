@@ -7,21 +7,18 @@
 #include "chen/base/utf8.hpp"
 #include "chen/sys/fs.hpp"
 #include "gtest/gtest.h"
-#include "../conf.hpp"
 
 TEST(BaseUtf8Test, General)
 {
     using chen::fs;
     using chen::utf8;
 
-    if (conf::data.empty())
-        return ::testing::internal::ColoredPrintf(::testing::internal::COLOR_YELLOW, "warning: you didn't specify test data folder, skip utf8 test\n\n");
-
     // these txt files contains utf-8 chars, each char's size is 1byte ~ 6byte
-    auto bom   = fs::read(conf::data + "/utf8/bom.txt");
-    auto sub   = fs::read(conf::data + "/utf8/sub.txt");
-    auto code  = fs::read(conf::data + "/utf8/code.txt");
-    auto plain = fs::read(conf::data + "/utf8/plain.txt");
+    auto dir   = fs::dirname(__FILE__) + "/../../data/";
+    auto bom   = fs::read(dir + "utf8/bom.txt");
+    auto sub   = fs::read(dir + "utf8/sub.txt");
+    auto code  = fs::read(dir + "utf8/code.txt");
+    auto plain = fs::read(dir + "utf8/plain.txt");
 
     EXPECT_EQ(11u, utf8::count(plain));
     EXPECT_EQ(sub, utf8::substr(plain, 0, 7));

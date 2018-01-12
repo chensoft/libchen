@@ -6,7 +6,6 @@
  */
 #include "chen/base/regex.hpp"
 #include "gtest/gtest.h"
-#include "../conf.hpp"
 
 TEST(BaseRegexTest, General)
 {
@@ -31,6 +30,6 @@ TEST(BaseRegexTest, General)
     }
     catch (const std::exception&)
     {
-        ::testing::internal::ColoredPrintf(::testing::internal::COLOR_YELLOW, "warning: regex support is incomplete on your compiler\n\n");
+        // warning: regex support is incomplete on your compiler, e.g: gcc 4.8.x
     }
 }

@@ -8,7 +8,6 @@
 #include "chen/base/str.hpp"
 #include "chen/sys/fs.hpp"
 #include "gtest/gtest.h"
-#include "../conf.hpp"
 
 TEST(DataJsonTest, Type)
 {
@@ -120,9 +119,9 @@ TEST(DataJsonTest, Validate)
 {
     using chen::json;
     using chen::str;
+    using chen::fs;
 
-    if (conf::data.empty())
-        return ::testing::internal::ColoredPrintf(::testing::internal::COLOR_YELLOW, "warning: you didn't specify test data folder, skip json test\n\n");
+    auto dir = fs::dirname(__FILE__) + "/../../data/";
 
     // fail
     for (int i = 1; i <= 33; ++i)
@@ -130,21 +129,21 @@ TEST(DataJsonTest, Validate)
         if (i == 18)  // I don't think too deep is an error
             continue;
 
-        EXPECT_THROW(json::validate(conf::data + str::format("/json/fail%d.json", i), true), json::error);
+        EXPECT_THROW(json::validate(dir + str::format("json/fail%d.json", i), true), json::error);
     }
 
-    EXPECT_THROW(json::validate(conf::data + "/json/role.json", true), json::error);
+    EXPECT_THROW(json::validate(dir + "json/role.json", true), json::error);
 
     // pass
     for (int j = 1; j <= 3; ++j)
     {
-        EXPECT_NO_THROW(json::validate(conf::data + str::format("/json/pass%d.json", j), true));
+        EXPECT_NO_THROW(json::validate(dir + str::format("json/pass%d.json", j), true));
     }
 
-    EXPECT_NO_THROW(json::parse(conf::data + "/json/pass1.json", true));
+    EXPECT_NO_THROW(json::parse(dir + "json/pass1.json", true));
 
     // exist
-    EXPECT_THROW(json::parse(conf::data + "/json/not_exist.json", true), json::error);
+    EXPECT_THROW(json::parse(dir + "json/not_exist.json", true), json::error);
 
     // equal
     std::string text = R"([

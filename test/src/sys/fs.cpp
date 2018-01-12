@@ -118,24 +118,24 @@ TEST(SysFsTest, General)
     fs::ctime("/");
 
     // touch
-    fs::write("/tmp/libchen_test.tmp", "content");
-    fs::write("/tmp/libchen_test.tmp", "content", 7);
-    fs::append("/tmp/libchen_test.tmp", "content");
-    fs::append("/tmp/libchen_test.tmp", "content", 7);
-    fs::read("/tmp/libchen_test.tmp", '\n');
+    fs::write("/tmp/libchen-test.tmp", "content");
+    fs::write("/tmp/libchen-test.tmp", "content", 7);
+    fs::append("/tmp/libchen-test.tmp", "content");
+    fs::append("/tmp/libchen-test.tmp", "content", 7);
+    fs::read("/tmp/libchen-test.tmp", '\n');
 
-    fs::touch("/tmp/libchen_test.tmp");
-    fs::touch("/tmp/libchen_test.tmp", std::time(nullptr), std::time(nullptr));
-    fs::copy("/tmp/libchen_test.tmp", "/tmp/libchen_test1.tmp");
-    fs::rename("/tmp/libchen_test.tmp", "/tmp/libchen_test2.tmp");
-    fs::remove("/tmp/libchen_test.tmp");
-    fs::remove("/tmp/libchen_test1.tmp");
-    fs::remove("/tmp/libchen_test2.tmp");
+    fs::touch("/tmp/libchen-test.tmp");
+    fs::touch("/tmp/libchen-test.tmp", std::time(nullptr), std::time(nullptr));
+    fs::copy("/tmp/libchen-test.tmp", "/tmp/libchen-test1.tmp");
+    fs::rename("/tmp/libchen-test.tmp", "/tmp/libchen-test2.tmp");
+    fs::remove("/tmp/libchen-test.tmp");
+    fs::remove("/tmp/libchen-test1.tmp");
+    fs::remove("/tmp/libchen-test2.tmp");
 
-    fs::create("/tmp/folder_libchen/nest", 0, true);
-    fs::copy("/tmp/folder_libchen", "/tmp/folder_libchen_copy");
-    fs::remove("/tmp/folder_libchen");
-    fs::remove("/tmp/folder_libchen_copy");
+    fs::create("/tmp/folder-libchen/nest", 0, true);
+    fs::copy("/tmp/folder-libchen", "/tmp/folder-libchen-copy");
+    fs::remove("/tmp/folder-libchen");
+    fs::remove("/tmp/folder-libchen_copy");
 
     // visit
     fs::collect("/", false);

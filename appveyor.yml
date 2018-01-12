@@ -28,4 +28,4 @@ build:
 test_script:
   - pwd
   - ls
-  - test\%configuration%\libchen_test.exe --data=..\test\data
+  - test\%configuration%\libchen-test.exe --data=..\test\data

@@ -1,27 +1,28 @@
-# source codes
-file(GLOB_RECURSE INC_TEST src/*.hpp)
-file(GLOB_RECURSE SRC_TEST src/*.cpp)
+add_executable(libchen-test EXCLUDE_FROM_ALL "")  # use make test to run it
 
-# generate app
-add_executable(libchen_test ${SRC_TEST})
-
-# properties
+# environment
 set_target_properties(
-        libchen_test PROPERTIES
-        CXX_STANDARD 11
-        CXX_STANDARD_REQUIRED YES
+    libchen-test PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED YES
 )
 
 if(UNIX)
-    target_compile_options(libchen_test PRIVATE -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers)
+    target_compile_options(libchen-test PRIVATE -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers)
 endif()
 
 # include path
-target_include_directories(libchen_test PRIVATE lib/googletest/googletest/include)
+target_include_directories(libchen-test PRIVATE lib/googletest/googletest/include)
+
+# source codes
+file(GLOB_RECURSE CHEN_TEST_SRC src/*.cpp)
+
+# generate app
+target_sources(libchen-test PRIVATE ${CHEN_TEST_SRC})
 
 # googletest
 set(gtest_force_shared_crt ON CACHE BOOL "Use /MD in googletest")
 add_subdirectory(lib/googletest/googletest)
 
 # link library
-target_link_libraries(libchen_test libchen gtest)
+target_link_libraries(libchen-test libchen gtest)

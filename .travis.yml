@@ -19,7 +19,7 @@ matrix:
       before_install:
         - echo $PWD
         - curl -L http://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-        - unzip -o android-ndk-r16b-linux-x86_64.zip
+        - unzip -oq android-ndk-r16b-linux-x86_64.zip
         - export NDK_ROOT=$PWD/android-ndk-r16b
       script:
         - mkdir build

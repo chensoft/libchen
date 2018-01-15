@@ -17,11 +17,10 @@ matrix:
       env: Android
       dist: trusty
       before_install:
-        - rm -rf $HOME/android-ndk-r16b
+        - echo $PWD
         - curl -L http://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-        - unzip -oq android-ndk-r16b-linux-x86_64.zip
-        - rm android-ndk-r16b-linux-x86_64.zip
-        - export NDK_ROOT=$HOME/android-ndk-r16b
+        - unzip -o android-ndk-r16b-linux-x86_64.zip
+        - export NDK_ROOT=$PWD/android-ndk-r16b
       script:
         - mkdir build
         - cd build

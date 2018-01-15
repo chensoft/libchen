@@ -21,11 +21,12 @@ target_compile_definitions(
 target_include_directories(libchen PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # source codes
-file(GLOB_RECURSE CHEN_SRC *.cpp)  # I hate to list all the files
+file(GLOB_RECURSE CHEN_INC ${PROJECT_SOURCE_DIR}/include/*.hpp)  # I hate to list all the files
+file(GLOB_RECURSE CHEN_SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 # static build
 # use -DBUILD_SHARED_LIBS=ON to build a shared library
-target_sources(libchen PRIVATE ${CHEN_SRC})
+target_sources(libchen PRIVATE ${CHEN_INC} ${CHEN_SRC})
 
 # install libs
 include(GNUInstallDirs)

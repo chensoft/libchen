@@ -15,10 +15,11 @@ endif()
 target_include_directories(libchen-test PRIVATE lib/googletest/googletest/include)
 
 # source codes
+file(GLOB_RECURSE CHEN_TEST_INC src/*.hpp)
 file(GLOB_RECURSE CHEN_TEST_SRC src/*.cpp)
 
 # generate app
-target_sources(libchen-test PRIVATE ${CHEN_TEST_SRC})
+target_sources(libchen-test PRIVATE ${CHEN_TEST_INC} ${CHEN_TEST_SRC})
 
 # googletest
 set(gtest_force_shared_crt ON CACHE BOOL "Use /MD in googletest")

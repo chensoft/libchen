@@ -18,7 +18,7 @@ target_compile_definitions(
 )
 
 # include path
-target_include_directories(libchen PUBLIC ${CMAKE_SOURCE_DIR}/include)  # todo maybe PROJECT_SOURCE_DIR
+target_include_directories(libchen PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # source codes
 file(GLOB_RECURSE CHEN_SRC *.cpp)  # I hate to list all the files
@@ -36,7 +36,7 @@ install(
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/chen DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/chen DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # code coverage
 option(CHEN_CODE_COVERAGE "Enable libchen code coverage." OFF)

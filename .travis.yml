@@ -4,7 +4,7 @@ matrix:
   include:
     - os: linux
       env: Linux
-      dist: trusty
+      dist: xenial
       script:
         - mkdir build
         - cd build
@@ -13,39 +13,39 @@ matrix:
         - test/libchen-test
         - bash <(curl -s https://codecov.io/bash)
 
-    - os: linux
-      env: Android
-      dist: trusty
-      before_install:
-        - echo $PWD
-        - curl -L http://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-        - unzip -oq android-ndk-r16b-linux-x86_64.zip
-        - export NDK_ROOT=$PWD/android-ndk-r16b
-      script:
-        - mkdir build
-        - cd build
-        - cmake -DCMAKE_SYSTEM_NAME=Android -DCMAKE_ANDROID_NDK=$NDK_ROOT -DCMAKE_SYSTEM_VERSION=17 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_STL_TYPE=gnustl_static ..
-        - make
-
-    - os: osx
-      env: macOS
-      osx_image: xcode9.2
-      script:
-        - mkdir build
-        - cd build
-        - cmake -G Xcode ..
-        - xcodebuild -target libchen-test -project libchen.xcodeproj -configuration Debug
-        - test/Debug/libchen-test
-
-    - os: osx
-      env: iOS
-      osx_image: xcode9.2
-      before_install:
-        - echo $PWD
-        - curl -L https://raw.githubusercontent.com/leetal/ios-cmake/master/ios.toolchain.cmake -O
-        - export IOS_TOOLCHAIN=$PWD/ios.toolchain.cmake
-      script:
-        - mkdir build
-        - cd build
-        - cmake -DCMAKE_TOOLCHAIN_FILE=$IOS_TOOLCHAIN -DENABLE_BITCODE=NO -DIOS_PLATFORM=OS ..
-        - make
+#    - os: linux
+#      env: Android
+#      dist: trusty
+#      before_install:
+#        - echo $PWD
+#        - curl -L http://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
+#        - unzip -oq android-ndk-r16b-linux-x86_64.zip
+#        - export NDK_ROOT=$PWD/android-ndk-r16b
+#      script:
+#        - mkdir build
+#        - cd build
+#        - cmake -DCMAKE_SYSTEM_NAME=Android -DCMAKE_ANDROID_NDK=$NDK_ROOT -DCMAKE_SYSTEM_VERSION=17 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_STL_TYPE=gnustl_static ..
+#        - make
+#
+#    - os: osx
+#      env: macOS
+#      osx_image: xcode9.2
+#      script:
+#        - mkdir build
+#        - cd build
+#        - cmake -G Xcode ..
+#        - xcodebuild -target libchen-test -project libchen.xcodeproj -configuration Debug
+#        - test/Debug/libchen-test
+#
+#    - os: osx
+#      env: iOS
+#      osx_image: xcode9.2
+#      before_install:
+#        - echo $PWD
+#        - curl -L https://raw.githubusercontent.com/leetal/ios-cmake/master/ios.toolchain.cmake -O
+#        - export IOS_TOOLCHAIN=$PWD/ios.toolchain.cmake
+#      script:
+#        - mkdir build
+#        - cd build
+#        - cmake -DCMAKE_TOOLCHAIN_FILE=$IOS_TOOLCHAIN -DENABLE_BITCODE=NO -DIOS_PLATFORM=OS ..
+#        - make

@@ -28,6 +28,10 @@ file(GLOB_RECURSE CHEN_SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
 # use -DBUILD_SHARED_LIBS=ON to build a shared library
 target_sources(libchen PRIVATE ${CHEN_INC} ${CHEN_SRC})
 
+# link library
+find_package(Threads)
+target_link_libraries(libchen ${CMAKE_THREAD_LIBS_INIT})
+
 # install libs
 include(GNUInstallDirs)
 

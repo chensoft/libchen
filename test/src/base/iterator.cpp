@@ -6,6 +6,7 @@
  */
 #include "chen/base/iterator.hpp"
 #include "catch.hpp"
+#include <cstring>
 #include <array>
 #include <list>
 

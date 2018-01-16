@@ -16,10 +16,8 @@ libchen is a general purpose C++ toolkit, it contains many useful and handy meth
 * iOS (xcode 7+)
 * Android (ndk r10+)
 * macOS (clang++ 3.5+)
-* Linux (g++ 4.8.4+)
+* Linux (g++ 4.9+)
 * Windows (vs 2015+)
-
-Notice that C++11's regex is incomplete on g++ 4.8.x, if you want to use it, you shall upgrade your compiler to the latest version.
 
 ## Features
 

@@ -1,9 +1,9 @@
 # libchen
 
-[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=Linux)](https://travis-ci.org/chensoft/libchen)
+[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=iOS)](https://travis-ci.org/chensoft/libchen)
 [![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=Android)](https://travis-ci.org/chensoft/libchen)
 [![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=macOS)](https://travis-ci.org/chensoft/libchen)
-[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=iOS)](https://travis-ci.org/chensoft/libchen)
+[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=Linux)](https://travis-ci.org/chensoft/libchen)
 [![Build status](https://img.shields.io/appveyor/ci/chensoft/libchen.svg?label=Windows)](https://ci.appveyor.com/project/chensoft/libchen)
 [![Coverage Status](https://img.shields.io/codecov/c/github/chensoft/libchen.svg)](https://codecov.io/gh/chensoft/libchen)
 [![release](https://img.shields.io/github/release/chensoft/libchen.svg?colorB=ff69b4)](https://github.com/chensoft/libchen/releases/latest)
@@ -13,10 +13,10 @@ libchen is a general purpose C++ toolkit, it contains many useful and handy meth
 
 ## Platforms
 
-* Linux (g++ 4.8.4+)
+* iOS (xcode 7+)
 * Android (ndk r10+)
 * macOS (clang++ 3.5+)
-* iOS (xcode 7+)
+* Linux (g++ 4.8.4+)
 * Windows (vs 2015+)
 
 Notice that C++11's regex is incomplete on g++ 4.8.x, if you want to use it, you shall upgrade your compiler to the latest version.

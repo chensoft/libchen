@@ -16,7 +16,7 @@ matrix:
         - cd build
         - export CC=gcc-4.9 && export CXX=g++-4.9
         - cmake -DCHEN_CODE_COVERAGE=ON ..
-        - make
+        - make -j
         - test/libchen-test
         - bash <(curl -s https://codecov.io/bash)
 
@@ -32,7 +32,7 @@ matrix:
         - mkdir build
         - cd build
         - cmake -DCMAKE_SYSTEM_NAME=Android -DCMAKE_ANDROID_NDK=$NDK_ROOT -DCMAKE_SYSTEM_VERSION=17 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_STL_TYPE=gnustl_static ..
-        - make
+        - make -j
 
     - os: osx
       env: macOS
@@ -55,4 +55,4 @@ matrix:
         - mkdir build
         - cd build
         - cmake -DCMAKE_TOOLCHAIN_FILE=$IOS_TOOLCHAIN -DENABLE_BITCODE=NO -DIOS_PLATFORM=OS ..
-        - make
+        - make -j

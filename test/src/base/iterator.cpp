@@ -5,11 +5,11 @@
  * @link   http://chensoft.com
  */
 #include "chen/base/iterator.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 #include <array>
 #include <list>
 
-TEST(BaseIterTest, General)
+TEST_CASE("BaseIterTest")
 {
     using chen::input_iterator;
     using chen::forward_iterator;
@@ -20,42 +20,42 @@ TEST(BaseIterTest, General)
     char buf[] = "chen";
     random_iterator<char> iter(buf);
 
-    EXPECT_EQ('c', *iter);
-    EXPECT_EQ('c', *iter++);
-    EXPECT_EQ('h', *iter);
-    EXPECT_EQ('e', *++iter);
-    EXPECT_EQ('h', *--iter);
-    EXPECT_EQ('h', *iter);
-    EXPECT_EQ('h', *iter--);
-    EXPECT_EQ('c', *iter);
+    CHECK('c' == *iter);
+    CHECK('c' == *iter++);
+    CHECK('h' == *iter);
+    CHECK('e' == *++iter);
+    CHECK('h' == *--iter);
+    CHECK('h' == *iter);
+    CHECK('h' == *iter--);
+    CHECK('c' == *iter);
 
-    EXPECT_EQ('c', iter[0]);
-    EXPECT_EQ('n', iter[3]);
+    CHECK('c' == iter[0]);
+    CHECK('n' == iter[3]);
 
-    EXPECT_EQ('n', *(iter + 3));
+    CHECK('n' == *(iter + 3));
 
     iter += 3;
-    EXPECT_EQ('n', *iter);
+    CHECK('n' == *iter);
 
-    EXPECT_EQ('c', *(iter - 3));
+    CHECK('c' == *(iter - 3));
 
     iter -= 3;
-    EXPECT_EQ('c', *iter);
+    CHECK('c' == *iter);
 
     random_iterator<char> proxy(iter++);
-    EXPECT_EQ('c', *proxy);
+    CHECK('c' == *proxy);
 
     random_iterator<char> other(iter);
 
-    EXPECT_TRUE(iter == other);
-    EXPECT_TRUE(iter <= other);
-    EXPECT_FALSE(iter != other);
+    CHECK(iter == other);
+    CHECK(iter <= other);
+    CHECK_FALSE(iter != other);
 
     ++other;
-    EXPECT_TRUE(iter < other);
-    EXPECT_TRUE(iter <= other);
-    EXPECT_FALSE(iter > other);
-    EXPECT_FALSE(iter >= other);
+    CHECK(iter < other);
+    CHECK(iter <= other);
+    CHECK_FALSE(iter > other);
+    CHECK_FALSE(iter >= other);
 
     // vector and array
     std::vector<char> vector(buf, buf + ::strlen(buf));
@@ -65,7 +65,7 @@ TEST(BaseIterTest, General)
     input_iterator<char> end(vector.end());
 
     std::copy(cur, end, array.begin());
-    EXPECT_TRUE(std::equal(vector.begin(), vector.end(), array.begin()));
+    CHECK(std::equal(vector.begin(), vector.end(), array.begin()));
 
     // list, its iterator is a bidirectional iterator
     std::list<char> list{'c', 'h', 'e', 'n'};
@@ -76,5 +76,5 @@ TEST(BaseIterTest, General)
     forward_iterator<char> f(buf);
 
     while (a != b)
-        EXPECT_TRUE(*a++ == *f++);
+        CHECK(*a++ == *f++);
 }

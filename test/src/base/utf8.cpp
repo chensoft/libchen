@@ -6,9 +6,9 @@
   */
 #include "chen/base/utf8.hpp"
 #include "chen/sys/fs.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
-TEST(BaseUtf8Test, General)
+TEST_CASE("BaseUtf8Test")
 {
     using chen::fs;
     using chen::utf8;
@@ -20,13 +20,13 @@ TEST(BaseUtf8Test, General)
     auto code  = fs::read(dir + "utf8/code.txt");
     auto plain = fs::read(dir + "utf8/plain.txt");
 
-    EXPECT_EQ(11u, utf8::count(plain));
-    EXPECT_EQ(sub, utf8::substr(plain, 0, 7));
-    EXPECT_EQ("", utf8::substr(plain, 5, 0));
-    EXPECT_TRUE(utf8::bom(bom));
-    EXPECT_FALSE(utf8::bom(plain));
+    CHECK(11u == utf8::count(plain));
+    CHECK(sub == utf8::substr(plain, 0, 7));
+    CHECK("" == utf8::substr(plain, 5, 0));
+    CHECK(utf8::bom(bom));
+    CHECK_FALSE(utf8::bom(plain));
 
-    EXPECT_EQ("a", utf8::convert(0x0061));
-    EXPECT_EQ("©", utf8::convert(0x00a9));
-    EXPECT_EQ(code, utf8::convert(0x9648));
+    CHECK("a" == utf8::convert(0x0061));
+    CHECK("©" == utf8::convert(0x00a9));
+    CHECK(code == utf8::convert(0x9648));
 }

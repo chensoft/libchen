@@ -5,16 +5,16 @@
  * @link   http://chensoft.com
  */
 #include "chen/tool/cmd.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
-TEST(ToolCmdTest, General)
+TEST_CASE("ToolCmdTest")
 {
     chen::cmd cmd;
 
     // help
     cmd.create("help", "show help");
     cmd.create("help", "show app help");  // test overwrite
- 
+
     // version
     cmd.create("version", "show app version");
 
@@ -30,17 +30,17 @@ TEST(ToolCmdTest, General)
     cmd.define("thread", "t", "thread count (default: 1)", 1);
     cmd.define("daemon", "d", "run as a daemon (default: no)", false);
 
-    EXPECT_THROW(cmd.define("", "", "", ""), chen::cmd::error_general);
-    EXPECT_THROW(cmd.define("s", "", "", ""), chen::cmd::error_general);
-    EXPECT_THROW(cmd.define("listen", "tiny", "", ""), chen::cmd::error_general);
-    EXPECT_THROW(cmd.define("port", "", "", ""), chen::cmd::error_general);
-    EXPECT_THROW(cmd.define("listen", "p", "", ""), chen::cmd::error_general);
+    CHECK_THROWS_AS(cmd.define("", "", "", ""), chen::cmd::error_general);
+    CHECK_THROWS_AS(cmd.define("s", "", "", ""), chen::cmd::error_general);
+    CHECK_THROWS_AS(cmd.define("listen", "tiny", "", ""), chen::cmd::error_general);
+    CHECK_THROWS_AS(cmd.define("port", "", "", ""), chen::cmd::error_general);
+    CHECK_THROWS_AS(cmd.define("listen", "p", "", ""), chen::cmd::error_general);
 
-    EXPECT_NO_THROW(cmd.change("start"));
-    EXPECT_THROW(cmd.change("noaction"), chen::cmd::error_general);
+    CHECK_NOTHROW(cmd.change("start"));
+    CHECK_THROWS_AS(cmd.change("noaction"), chen::cmd::error_general);
 
-    EXPECT_FALSE(cmd.exist("noaction"));
-    EXPECT_FALSE(cmd.exist("start", "nooption"));
+    CHECK_FALSE(cmd.exist("noaction"));
+    CHECK_FALSE(cmd.exist("start", "nooption"));
 
     // suggest
     cmd.suggest("edition", "version");
@@ -54,10 +54,10 @@ TEST(ToolCmdTest, General)
 
         cmd.parse(sizeof(argv) / sizeof(argv[0]) - 1, &argv[0]);
 
-        EXPECT_EQ(static_cast<int>(sizeof(argv) / sizeof(argv[0])) - 1, cmd.argc());
-        EXPECT_EQ(&argv[0], cmd.argv());
-        EXPECT_EQ("app", cmd.app());
-        EXPECT_EQ("version", cmd.current());
+        CHECK(static_cast<int>(sizeof(argv) / sizeof(argv[0])) - 1 == cmd.argc());
+        CHECK(&argv[0] == cmd.argv());
+        CHECK("app" == cmd.app());
+        CHECK("version" == cmd.current());
     }
 
     // simulate -> start
@@ -68,12 +68,12 @@ TEST(ToolCmdTest, General)
 
         cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]);
 
-        EXPECT_EQ("start", cmd.current());
-        EXPECT_EQ(80, cmd.intVal("port"));
-        EXPECT_EQ("0.0.0.0", cmd.strVal("addr"));
+        CHECK("start" == cmd.current());
+        CHECK(80 == cmd.intVal("port"));
+        CHECK("0.0.0.0" == cmd.strVal("addr"));
 
-        EXPECT_FALSE(cmd.isSet("daemon"));
-        EXPECT_FALSE(cmd.boolVal("daemon"));
+        CHECK_FALSE(cmd.isSet("daemon"));
+        CHECK_FALSE(cmd.boolVal("daemon"));
     }
 
     // simulate -> start
@@ -90,15 +90,15 @@ TEST(ToolCmdTest, General)
 
         cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]);
 
-        EXPECT_EQ("start", cmd.current());
-        EXPECT_EQ(8888, cmd.intVal("port"));
-        EXPECT_EQ("127.0.0.1", cmd.strVal("addr"));
+        CHECK("start" == cmd.current());
+        CHECK(8888 == cmd.intVal("port"));
+        CHECK("127.0.0.1" == cmd.strVal("addr"));
 
-        EXPECT_THROW(cmd.strVal("x"), chen::cmd::error);
-        EXPECT_THROW(cmd.strVal("color"), chen::cmd::error);
+        CHECK_THROWS_AS(cmd.strVal("x"), chen::cmd::error);
+        CHECK_THROWS_AS(cmd.strVal("color"), chen::cmd::error);
 
-        EXPECT_TRUE(cmd.isSet("port"));
-        EXPECT_FALSE(cmd.objects().empty());
+        CHECK(cmd.isSet("port"));
+        CHECK_FALSE(cmd.objects().empty());
     }
 
     // simulate -> sub-action
@@ -110,7 +110,7 @@ TEST(ToolCmdTest, General)
 
         cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]);
 
-        EXPECT_EQ("module.update", cmd.current());
+        CHECK("module.update" == cmd.current());
     }
 
     // simulate -> exception
@@ -119,7 +119,7 @@ TEST(ToolCmdTest, General)
     {
         char *argv[] = {param_app, param_start, param_a, nullptr};
 
-        EXPECT_THROW(cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]), chen::cmd::error);
+        CHECK_THROWS_AS(cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]), chen::cmd::error);
     }
 
     char param_speedx[] = "--speedx";  // long option not exist
@@ -127,7 +127,7 @@ TEST(ToolCmdTest, General)
     {
         char *argv[] = {param_app, param_start, param_speedx, nullptr};
 
-        EXPECT_THROW(cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]), chen::cmd::error);
+        CHECK_THROWS_AS(cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]), chen::cmd::error);
     }
 
     char param_x[] =  "-x";  // short option not exist
@@ -135,7 +135,7 @@ TEST(ToolCmdTest, General)
     {
         char *argv[] = {param_app, param_start, param_x, nullptr};
 
-        EXPECT_THROW(cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]), chen::cmd::error);
+        CHECK_THROWS_AS(cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]), chen::cmd::error);
     }
 
 
@@ -147,7 +147,7 @@ TEST(ToolCmdTest, General)
         try
         {
             cmd.parse(static_cast<int>(sizeof(argv) / sizeof(argv[0]) - 1), &argv[0]);
-            EXPECT_NO_THROW(throw "should not reach here");
+            CHECK_NOTHROW(throw "should not reach here");
         }
         catch (const chen::cmd::error_parse &error)
         {

@@ -7,9 +7,9 @@
 #include "chen/data/ini.hpp"
 #include "chen/base/str.hpp"
 #include "chen/sys/fs.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
-TEST(DataIniTest, General)
+TEST_CASE("DataIniTest")
 {
     using chen::ini;
     using chen::str;
@@ -20,13 +20,13 @@ TEST(DataIniTest, General)
     // fail
     for (int i = 1; i <= 5; ++i)
     {
-        EXPECT_THROW(ini::parse(dir + str::format("ini/fail%d.ini", i), true), ini::error);
+        CHECK_THROWS_AS(ini::parse(dir + str::format("ini/fail%d.ini", i), true), ini::error);
     }
 
     // pass
     for (int j = 1; j <= 4; ++j)
     {
-        EXPECT_NO_THROW(ini::parse(dir + str::format("ini/pass%d.ini", j), true));
+        CHECK_NOTHROW(ini::parse(dir + str::format("ini/pass%d.ini", j), true));
     }
 
     // equal(usage of block text in C++11)
@@ -34,19 +34,19 @@ TEST(DataIniTest, General)
 key="simple \\\0\a\b\t\r\n\:\"\;\#value")";
 
     auto parse = ini::parse(text);
-    EXPECT_EQ(text, ini::stringify(parse));
+    CHECK(text == ini::stringify(parse));
 
     // parse special string
-    EXPECT_TRUE(ini::parse("   ").empty());
-    EXPECT_THROW(ini::parse("ab=\\x9A"), ini::error);
-    EXPECT_THROW(ini::parse("ab=\\x9A@@"), ini::error);
-    EXPECT_THROW(ini::parse("emoji=\\xD83D\\xDE00"), ini::error);
+    CHECK(ini::parse("   ").empty());
+    CHECK_THROWS_AS(ini::parse("ab=\\x9A"), ini::error);
+    CHECK_THROWS_AS(ini::parse("ab=\\x9A@@"), ini::error);
+    CHECK_THROWS_AS(ini::parse("emoji=\\xD83D\\xDE00"), ini::error);
 
     // error
     text = R"([section
 key="section is not enclosed")";
 
-    EXPECT_THROW(ini::parse(text), ini::error);
+    CHECK_THROWS_AS(ini::parse(text), ini::error);
 
     try
     {
@@ -54,6 +54,6 @@ key="section is not enclosed")";
     }
     catch (const ini::error &e)
     {
-        EXPECT_EQ(8u, e.position);
+        CHECK(8u == e.position);
     }
 }

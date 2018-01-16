@@ -5,9 +5,9 @@
  * @link   http://chensoft.com
  */
 #include "chen/sys/fs.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
-TEST(SysFsTest, General)
+TEST_CASE("SysFsTest")
 {
     using chen::fs;
 
@@ -16,97 +16,97 @@ TEST(SysFsTest, General)
     fs::temp();
 
     // drive
-    EXPECT_EQ("C:\\", fs::drive("C:\\Windows\\System32"));
-    EXPECT_EQ("/", fs::drive("/usr/local"));
-    EXPECT_EQ("", fs::drive("file.txt"));
-    EXPECT_EQ("", fs::drive(""));
+    CHECK("C:\\" == fs::drive("C:\\Windows\\System32"));
+    CHECK("/" == fs::drive("/usr/local"));
+    CHECK("" == fs::drive("file.txt"));
+    CHECK("" == fs::drive(""));
 
     // path
-    EXPECT_EQ(fs::current(), fs::realpath(fs::current()));
-    EXPECT_EQ(fs::current(), fs::absolute(".", fs::current()));
+    CHECK(fs::current() == fs::realpath(fs::current()));
+    CHECK(fs::current() == fs::absolute(".", fs::current()));
 
-    EXPECT_EQ(fs::home(), fs::realpath("~"));
-    EXPECT_EQ(fs::home(), fs::absolute("~"));
-    EXPECT_EQ(fs::home() + "/Downloads", fs::absolute("~/Downloads"));
+    CHECK(fs::home() == fs::realpath("~"));
+    CHECK(fs::home() == fs::absolute("~"));
+    CHECK(fs::home() + "/Downloads" == fs::absolute("~/Downloads"));
 
     // normalize
-    EXPECT_EQ("", fs::normalize(""));
-    EXPECT_EQ("a", fs::normalize("./a"));
-    EXPECT_EQ("a/b", fs::normalize("a/./b"));
-    EXPECT_EQ("a/b", fs::normalize("a///b"));
-    EXPECT_EQ("a/.../b", fs::normalize("a/.../b"));  // this is a invalid path
-    EXPECT_EQ("../b", fs::normalize("a/../../b"));   // the second .. don't know how to removed
-    EXPECT_EQ("/usr/local", fs::normalize("/usr/local/etc/.."));
-    EXPECT_EQ("/", fs::normalize("/.."));
+    CHECK("" == fs::normalize(""));
+    CHECK("a" == fs::normalize("./a"));
+    CHECK("a/b" == fs::normalize("a/./b"));
+    CHECK("a/b" == fs::normalize("a///b"));
+    CHECK("a/.../b" == fs::normalize("a/.../b"));  // this is a invalid path
+    CHECK("../b" == fs::normalize("a/../../b"));   // the second .. don't know how to removed
+    CHECK("/usr/local" == fs::normalize("/usr/local/etc/.."));
+    CHECK("/" == fs::normalize("/.."));
 
-    EXPECT_EQ("C:\\a", fs::normalize("C:\\a"));
-    EXPECT_EQ("C:\\a", fs::normalize("C:\\.\\a"));
-    EXPECT_EQ("C:\\a\\...\\b", fs::normalize("C:\\a\\...\\b"));
-    EXPECT_EQ("C:\\b", fs::normalize("C:\\a\\..\\..\\b"));
-    EXPECT_EQ("C:\\b", fs::normalize("C:\\a\\..\\b"));
+    CHECK("C:\\a" == fs::normalize("C:\\a"));
+    CHECK("C:\\a" == fs::normalize("C:\\.\\a"));
+    CHECK("C:\\a\\...\\b" == fs::normalize("C:\\a\\...\\b"));
+    CHECK("C:\\b" == fs::normalize("C:\\a\\..\\..\\b"));
+    CHECK("C:\\b" == fs::normalize("C:\\a\\..\\b"));
 
     // dirname
-    EXPECT_EQ("", fs::dirname(""));
-    EXPECT_EQ("/home/staff/Downloads", fs::dirname("/home/staff/Downloads/file.txt"));
-    EXPECT_EQ("/usr", fs::dirname("/usr/."));
-    EXPECT_EQ("/", fs::dirname("/usr/"));
-    EXPECT_EQ("/", fs::dirname("/usr///"));
-    EXPECT_EQ("/", fs::dirname("/"));
-    EXPECT_EQ(".", fs::dirname("file.txt"));
+    CHECK("" == fs::dirname(""));
+    CHECK("/home/staff/Downloads" == fs::dirname("/home/staff/Downloads/file.txt"));
+    CHECK("/usr" == fs::dirname("/usr/."));
+    CHECK("/" == fs::dirname("/usr/"));
+    CHECK("/" == fs::dirname("/usr///"));
+    CHECK("/" == fs::dirname("/"));
+    CHECK("." == fs::dirname("file.txt"));
 
-    EXPECT_EQ("C:\\Windows", fs::dirname("C:\\Windows\\System32"));
-    EXPECT_EQ("C:\\Windows\\System32", fs::dirname("C:\\Windows\\System32\\cmd.exe"));
-    EXPECT_EQ("C:\\", fs::dirname("C:\\\\\\"));
-    EXPECT_EQ("C:\\", fs::dirname("C:\\"));
+    CHECK("C:\\Windows" == fs::dirname("C:\\Windows\\System32"));
+    CHECK("C:\\Windows\\System32" == fs::dirname("C:\\Windows\\System32\\cmd.exe"));
+    CHECK("C:\\" == fs::dirname("C:\\\\\\"));
+    CHECK("C:\\" == fs::dirname("C:\\"));
 
     // basename
-    EXPECT_EQ("file.txt", fs::basename("/home/staff/Downloads/file.txt"));
-    EXPECT_EQ("home", fs::basename("/home/"));
-    EXPECT_EQ("", fs::basename("/"));
-    EXPECT_EQ("file.txt", fs::basename("file.txt"));
-    EXPECT_EQ("file.txt", fs::basename("file.txt", "none"));
-    EXPECT_EQ("file", fs::basename("file.txt", ".txt"));
+    CHECK("file.txt" == fs::basename("/home/staff/Downloads/file.txt"));
+    CHECK("home" == fs::basename("/home/"));
+    CHECK("" == fs::basename("/"));
+    CHECK("file.txt" == fs::basename("file.txt"));
+    CHECK("file.txt" == fs::basename("file.txt", "none"));
+    CHECK("file" == fs::basename("file.txt", ".txt"));
 
-    EXPECT_EQ("cmd.exe", fs::basename("C:\\Windows\\System32\\cmd.exe"));
-    EXPECT_EQ("", fs::basename("C:\\"));
+    CHECK("cmd.exe" == fs::basename("C:\\Windows\\System32\\cmd.exe"));
+    CHECK("" == fs::basename("C:\\"));
 
     // extname
-    EXPECT_EQ("", fs::extname("file.txt", 0));
-    EXPECT_EQ(".txt", fs::extname("/home/staff/Downloads/file.txt"));
-    EXPECT_EQ("", fs::extname("/home/"));
-    EXPECT_EQ("", fs::extname("/"));
+    CHECK("" == fs::extname("file.txt", 0));
+    CHECK(".txt" == fs::extname("/home/staff/Downloads/file.txt"));
+    CHECK("" == fs::extname("/home/"));
+    CHECK("" == fs::extname("/"));
 
-    EXPECT_EQ(".exe", fs::extname("C:\\Windows\\System32\\cmd.exe"));
-    EXPECT_EQ("", fs::extname("C:\\"));
+    CHECK(".exe" == fs::extname("C:\\Windows\\System32\\cmd.exe"));
+    CHECK("" == fs::extname("C:\\"));
 
     // absolute
-    EXPECT_TRUE(fs::isAbsolute("/usr/local"));
-    EXPECT_FALSE(fs::isAbsolute("file.txt"));
-    EXPECT_FALSE(fs::isAbsolute(""));
+    CHECK(fs::isAbsolute("/usr/local"));
+    CHECK_FALSE(fs::isAbsolute("file.txt"));
+    CHECK_FALSE(fs::isAbsolute(""));
 
-    EXPECT_TRUE(fs::isAbsolute("C:\\Windows\\System32"));
+    CHECK(fs::isAbsolute("C:\\Windows\\System32"));
 
     // change
     auto cwd = fs::current();
     fs::change(cwd);
-    EXPECT_EQ(cwd, fs::current());
+    CHECK(cwd == fs::current());
 
     // platform dependent
 #ifndef _WIN32
-    EXPECT_EQ("/", fs::root());
-    EXPECT_EQ(std::vector<std::string>({"/"}), fs::drives());
-    EXPECT_EQ('/', fs::separator());
+    CHECK("/" == fs::root());
+    CHECK(std::vector<std::string>({"/"}) == fs::drives());
+    CHECK('/' == fs::separator());
 
     // absolute
-    EXPECT_EQ(fs::normalize(fs::current() + "/../a/b"), fs::absolute("../a/b"));
-    EXPECT_EQ("/a/b", fs::absolute("/a/b"));
-    EXPECT_EQ("/a/b", fs::absolute("/a/b", fs::current()));
+    CHECK(fs::normalize(fs::current() + "/../a/b") == fs::absolute("../a/b"));
+    CHECK("/a/b" == fs::absolute("/a/b"));
+    CHECK("/a/b" == fs::absolute("/a/b", fs::current()));
 
     // check
-    EXPECT_TRUE(fs::isExist("/"));
-    EXPECT_TRUE(fs::isDir("/"));
-    EXPECT_FALSE(fs::isFile("/"));
-    EXPECT_FALSE(fs::isLink("/"));
+    CHECK(fs::isExist("/"));
+    CHECK(fs::isDir("/"));
+    CHECK_FALSE(fs::isFile("/"));
+    CHECK_FALSE(fs::isLink("/"));
 
     // just call
     fs::isReadable("/");

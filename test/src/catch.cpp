@@ -4,11 +4,12 @@
  * @author Jian Chen <admin@chensoft.com>
  * @link   http://chensoft.com
  */
+#define CATCH_CONFIG_RUNNER
+
 #include "chen/chen.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
 int main(int argc, char *argv[])
 {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    return Catch::Session().run(argc, argv);
 }

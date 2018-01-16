@@ -5,11 +5,11 @@
  * @link   http://chensoft.com
  */
 #include "chen/sys/sys.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
-TEST(SysSysTest, General)
+TEST_CASE("SysSysTest")
 {
     using chen::sys;
 
-    EXPECT_NE(sys::uuid(), sys::uuid());
+    CHECK(sys::uuid() != sys::uuid());
 }

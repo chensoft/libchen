@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file(see http://keepachangelog.com/).
 
 ## [Unreleased]
+### Changed
+- test: use Catch2 as unit test framework, lightweight and clean.
 
 ## [1.2.0] - 2018-01-15
 ### Added

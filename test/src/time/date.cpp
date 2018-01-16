@@ -5,26 +5,26 @@
  * @link   http://chensoft.com
  */
 #include "chen/time/date.hpp"
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
-TEST(TimeDateTest, General)
+TEST_CASE("TimeDateTest")
 {
     chen::date d;
 
-    EXPECT_GE(d.microsecond, 0);
-    EXPECT_LE(d.microsecond, 999999);
-    EXPECT_GE(d.second, 0);
-    EXPECT_LE(d.second, 59);
-    EXPECT_GE(d.minute, 0);
-    EXPECT_LE(d.minute, 59);
-    EXPECT_GE(d.hour, 0);
-    EXPECT_LE(d.hour, 23);
-    EXPECT_GE(d.day, 1);
-    EXPECT_LE(d.day, 31);
-    EXPECT_GE(d.wday, 0);
-    EXPECT_LE(d.wday, 6);
-    EXPECT_GE(d.month, 1);
-    EXPECT_LE(d.month, 12);
-    EXPECT_GE(d.year, 2017);
-    EXPECT_GE(d.zone, 0);
+    CHECK(d.microsecond >= 0);
+    CHECK(d.microsecond <= 999999);
+    CHECK(d.second >= 0);
+    CHECK(d.second <= 59);
+    CHECK(d.minute >= 0);
+    CHECK(d.minute <= 59);
+    CHECK(d.hour >= 0);
+    CHECK(d.hour <= 23);
+    CHECK(d.day >= 1);
+    CHECK(d.day <= 31);
+    CHECK(d.wday >= 0);
+    CHECK(d.wday <= 6);
+    CHECK(d.month >= 1);
+    CHECK(d.month <= 12);
+    CHECK(d.year >= 2017);
+    CHECK(d.zone >= 0);
 }

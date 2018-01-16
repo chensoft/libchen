@@ -31,6 +31,7 @@ matrix:
       script:
         - mkdir build
         - cd build
+        - echo "need latest cmake(3.9+?) if you use ndk r16b"
         - cmake -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=14 -DCMAKE_ANDROID_NDK=$NDK_ROOT -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_STL_TYPE=c++_static ..
         - make -j
 

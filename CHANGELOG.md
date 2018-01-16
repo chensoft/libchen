@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file(see http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [1.2.0] - 2018-01-15
 ### Added
 - cmd: store app start info.
 - proc: run a command and get its output.

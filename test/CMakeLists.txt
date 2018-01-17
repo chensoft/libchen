@@ -7,10 +7,6 @@ set_target_properties(
     CXX_STANDARD_REQUIRED YES
 )
 
-if(UNIX)
-    target_compile_options(libchen-test PRIVATE -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers)
-endif()
-
 # include path
 target_include_directories(libchen-test PRIVATE src)
 

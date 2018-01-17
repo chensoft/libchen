@@ -43,6 +43,11 @@ install(
 )
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/chen DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
+# code warnings
+if(UNIX)
+    target_compile_options(libchen PUBLIC -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers)
+endif()
+
 # code coverage
 option(CHEN_CODE_COVERAGE "Enable libchen code coverage." OFF)
 

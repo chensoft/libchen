@@ -1,9 +1,6 @@
 # libchen
 
-[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=iOS)](https://travis-ci.org/chensoft/libchen)
-[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=Android)](https://travis-ci.org/chensoft/libchen)
-[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=macOS)](https://travis-ci.org/chensoft/libchen)
-[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=Linux)](https://travis-ci.org/chensoft/libchen)
+[![Build Status](https://img.shields.io/travis/chensoft/libchen.svg?label=iOS%20|%20Android%20|%20macOS%20|%20Linux)](https://travis-ci.org/chensoft/libchen)
 [![Build status](https://img.shields.io/appveyor/ci/chensoft/libchen.svg?label=Windows)](https://ci.appveyor.com/project/chensoft/libchen)
 [![Coverage Status](https://img.shields.io/codecov/c/github/chensoft/libchen.svg)](https://codecov.io/gh/chensoft/libchen)
 [![release](https://img.shields.io/github/release/chensoft/libchen.svg?colorB=ff69b4)](https://github.com/chensoft/libchen/releases/latest)

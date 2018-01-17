@@ -13,11 +13,11 @@ libchen is a general purpose C++ toolkit, it contains many useful and handy meth
 
 ## Platforms
 
-* iOS (xcode 7+)
-* Android (ndk r10+)
-* macOS (clang++ 3.5+)
-* Linux (g++ 4.9+)
-* Windows (vs 2015+)
+* iOS (Xcode 8+)
+* Android (NDK r10e+)
+* macOS (Xcode 8+)
+* Linux (GCC 4.9+)
+* Windows (VS 2015+)
 
 ## Features
 

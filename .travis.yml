@@ -25,19 +25,19 @@ matrix:
       dist: trusty
       before_install:
         - echo $PWD
-        - curl -L http://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-        - unzip -oq android-ndk-r16b-linux-x86_64.zip
-        - export NDK_ROOT=$PWD/android-ndk-r16b
+        - curl -L http://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip -O
+        - unzip -oq android-ndk-r10e-linux-x86_64.zip
+        - export NDK_ROOT=$PWD/android-ndk-r10e
       script:
         - mkdir build
         - cd build
-        - echo "need latest cmake(3.9+?) if you use ndk r16b"
+        - echo "need latest cmake(3.9+?) if you use ndk r16b+"
         - cmake -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=14 -DCMAKE_ANDROID_NDK=$NDK_ROOT -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_STL_TYPE=c++_static ..
         - make -j
 
     - os: osx
       env: macOS
-      osx_image: xcode9.2
+      osx_image: xcode8.3
       script:
         - mkdir build
         - cd build
@@ -47,7 +47,7 @@ matrix:
 
     - os: osx
       env: iOS
-      osx_image: xcode9.2
+      osx_image: xcode8.3
       before_install:
         - echo $PWD
         - curl -L https://raw.githubusercontent.com/leetal/ios-cmake/master/ios.toolchain.cmake -O

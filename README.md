@@ -4,7 +4,7 @@
 [![Build status](https://img.shields.io/appveyor/ci/chensoft/libchen.svg?logo=appveyor&label=Windows)](https://ci.appveyor.com/project/chensoft/libchen)
 [![Coverage Status](https://img.shields.io/codecov/c/github/chensoft/libchen.svg)](https://codecov.io/gh/chensoft/libchen)
 [![release](https://img.shields.io/github/release/chensoft/libchen.svg?colorB=ff69b4)](https://github.com/chensoft/libchen/releases/latest)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/chensoft/libchen/master/LICENSE)
 
 libchen is a general purpose C++ toolkit, it contains many useful and handy methods for creating complex software. It's cross-platform and released under the MIT License.
 

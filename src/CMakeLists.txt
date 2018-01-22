@@ -49,9 +49,9 @@ if(UNIX)
 endif()
 
 # code coverage
-option(CHEN_CODE_COVERAGE "Enable libchen code coverage." OFF)
+option(ENABLE_CODE_COVERAGE "Enable code coverage." OFF)
 
-if(CHEN_CODE_COVERAGE)
-    target_compile_options(libchen PRIVATE -g -O0 --coverage)  # debug, no optimization, enable coverage
+if(ENABLE_CODE_COVERAGE)
+    target_compile_options(libchen PUBLIC -g -O0 --coverage)  # debug, no optimization, enable coverage
     target_link_libraries(libchen gcov)
 endif()

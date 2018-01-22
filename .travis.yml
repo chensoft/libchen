@@ -15,7 +15,7 @@ matrix:
         - mkdir build
         - cd build
         - export CC=gcc-4.9 && export CXX=g++-4.9
-        - cmake -DCHEN_CODE_COVERAGE=ON ..
+        - cmake -DENABLE_CODE_COVERAGE=ON ..
         - make -j
         - test/libchen-test
         - bash <(curl -s https://codecov.io/bash)

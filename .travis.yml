@@ -10,11 +10,11 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-4.9
+            - g++-5
       script:
         - mkdir build
         - cd build
-        - export CC=gcc-4.9 && export CXX=g++-4.9
+        - export CC=gcc-5 && export CXX=g++-5
         - cmake -DENABLE_CODE_COVERAGE=ON ..
         - make -j
         - test/libchen-test

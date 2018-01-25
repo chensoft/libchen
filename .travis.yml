@@ -17,7 +17,7 @@ matrix:
         - export CC=gcc-5 && export CXX=g++-5
         - cmake -DENABLE_CODE_COVERAGE=ON ..
         - make -j
-        - test/libchen-test
+        - test/libchen-test -s -r compact
         - bash <(curl -s https://codecov.io/bash)
 
     - os: linux
@@ -43,7 +43,7 @@ matrix:
         - cd build
         - cmake -G Xcode ..
         - xcodebuild -target libchen-test -project libchen.xcodeproj -configuration Debug
-        - test/Debug/libchen-test
+        - test/Debug/libchen-test -s -r compact
 
     - os: osx
       env: iOS

@@ -4,7 +4,7 @@ add_executable(libchen-test "")
 set_target_properties(
     libchen-test PROPERTIES
     CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED YES
+    CXX_STANDARD_REQUIRED ON
 )
 
 # include path

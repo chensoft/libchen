@@ -4,7 +4,7 @@ add_library(libchen "")
 set_target_properties(
     libchen PROPERTIES
     CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED YES
+    CXX_STANDARD_REQUIRED ON
     VERSION ${libchen_VERSION}
     OUTPUT_NAME libchen PREFIX ""
 )

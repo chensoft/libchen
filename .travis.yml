@@ -1,30 +1,23 @@
-language: cpp
+language: shell
 
 matrix:
   include:
-    - os: linux
-      env: Linux
-      dist: trusty
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-5
+    - os: osx
+      env: iOS
+      osx_image: xcode8.3
+      before_install:
+        - curl -L https://raw.githubusercontent.com/leetal/ios-cmake/master/ios.toolchain.cmake -O
+        - export IOS_TOOLCHAIN=$PWD/ios.toolchain.cmake
       script:
         - mkdir build
         - cd build
-        - export CC=gcc-5 && export CXX=g++-5
-        - cmake -DENABLE_CODE_COVERAGE=ON ..
+        - cmake -DCMAKE_TOOLCHAIN_FILE=$IOS_TOOLCHAIN -DENABLE_BITCODE=NO -DIOS_PLATFORM=OS ..
         - make -j
-        - test/libchen-test -s -r compact
-        - bash <(curl -s https://codecov.io/bash)
 
     - os: linux
       env: Android
       dist: trusty
       before_install:
-        - echo $PWD
         - curl -L http://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip -O
         - unzip -oq android-ndk-r10e-linux-x86_64.zip
         - export NDK_ROOT=$PWD/android-ndk-r10e
@@ -45,15 +38,37 @@ matrix:
         - xcodebuild -target libchen-test -project libchen.xcodeproj -configuration Debug
         - test/Debug/libchen-test -s -r compact
 
-    - os: osx
-      env: iOS
-      osx_image: xcode8.3
+    - os: linux
+      env: Linux
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
       before_install:
-        - echo $PWD
-        - curl -L https://raw.githubusercontent.com/leetal/ios-cmake/master/ios.toolchain.cmake -O
-        - export IOS_TOOLCHAIN=$PWD/ios.toolchain.cmake
+        - export CC=gcc-5 && export CXX=g++-5
       script:
         - mkdir build
         - cd build
-        - cmake -DCMAKE_TOOLCHAIN_FILE=$IOS_TOOLCHAIN -DENABLE_BITCODE=NO -DIOS_PLATFORM=OS ..
+        - cmake -DENABLE_CODE_COVERAGE=ON ..
         - make -j
+        - test/libchen-test -s -r compact
+        - bash <(curl -s https://codecov.io/bash)
+
+    - os: windows
+      env: Windows
+      before_install:
+        - CMAKE=`dirname "$(find '/c/Program Files'* -name 'cmake.exe' 2>/dev/null | head -n1)"`
+        - MSBUILD=`dirname "$(find '/c/Program Files'* -name 'MSBuild.exe' 2>/dev/null | grep 'amd64' | head -n1)"`
+        - export PATH=$PATH:"$CMAKE":"$MSBUILD"
+        - echo $PATH
+        - cmake --version
+        - MSBuild.exe -version
+      script:
+        - mkdir build
+        - cd build
+        - cmake -G "Visual Studio 15 2017 Win64" ..
+        - MSBuild.exe libchen.sln
+        - test/Debug/libchen-test.exe -s -r compact
